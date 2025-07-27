@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 // está incompletaaaaaaaaaaaaaaaaa
 //falta añadir las directivas (aunque no sale como requerido)
 //falta considerar los datos de los cursos
 //con eso se añaden los controllers para subir la data
 // falta modelos y migraciones 
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 }); 
 
 Route::get('/cursos', function () {
