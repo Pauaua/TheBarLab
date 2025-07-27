@@ -1,15 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// En todo lo estático es mejor usar view antes que get, ya que view es más rápido y no requiere lógica adicional. 
-// Get es más adecuado para rutas que requieren lógica o parámetros dinámicos.
+// está incompletaaaaaaaaaaaaaaaaa
+//falta añadir las directivas (aunque no sale como requerido)
+//falta considerar los datos de los cursos
+//con eso se añaden los controllers para subir la data
+// falta modelos y migraciones 
 
+Route::get('/', function () {
+    return view('welcome');
+}); 
 
-// Página de bienvenida de la escuela
-Route::view('/', 'inicio');
-
-// Página que muestra la lista de cursos
-Route::view('/cursos', 'cursos');
+Route::get('/cursos', function () {
+    // agregar los datos de los cursos
+    return view('cursos');
+});
 
 // Vista para el detalle de un curso específico (parámetro dinámico, por eso se usa GET)
 Route::get('/cursos/{id}', function ($id) {
@@ -17,17 +22,37 @@ Route::get('/cursos/{id}', function ($id) {
 });
 
 // Página con información sobre la escuela
-Route::view('/nosotros', 'nosotros');
+Route::get('/nosotros', function () {
+    return view('nosotros');
+});
 
 // Formulario o información de contacto
-Route::view('/contacto', 'contacto');
+Route::get('/contacto', function () {
+    return view('contacto');
+});
 
 
 // Página inicio sesión estática
-Route::view('/login', 'auth.login');
+Route::get('/login', function () {
+    return view('auth.login');
+});
+// Post para el login
+Route::post('/login', function () {
+    // falta: lógica de autenticación
+    return redirect('/'); // Redirigir a la página principal después del login
+});
 
 // Página de registro de nuevos alumnos estática
-Route::view('/registro', 'auth.registro');
+Route::get('/registro', function () {
+    return view('auth.registro');
+});
+// Post para el registro 
+Route::post('/registro', function () {
+    // falta: lógica de registro
+    return redirect('/login'); // Redirigir al login después del registro
+});
 
 // Perfil del alumno
-Route::view('/perfil', 'alumno.perfil');
+Route::get('/perfil', function () {
+    return view('alumno.perfil');
+});
