@@ -145,6 +145,7 @@
 <body>
     <!-- Navbar -->
      @include('Components/navbar')
+     @include('Components.modal')
     <!-- Hero Cover -->
     <div class="container-fluid px-0">
         <div class="position-relative" style="min-height: 100vh;">
@@ -175,7 +176,7 @@
                         <img src="assets/bartender1.jpg" alt="Bartender Profesional">
                         <div class="card-body text-center">
                             <div class="card-title">Bartender Profesional</div>
-                            <a href="/bartenderprofesional" class="btn btn-outline-light btn-sm mt-2 mx-auto d-inline-block">Ver Más</a>
+                            <a href="/curso-detalle" class="btn btn-outline-light btn-sm mt-2 mx-auto d-inline-block">Ver Más</a>
                         </div>
                     </div>
                 </div>
