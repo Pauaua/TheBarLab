@@ -1,10 +1,6 @@
 <?php
 
-// está incompletaaaaaaaaaaaaaaaaa
-//falta añadir las directivas (aunque no sale como requerido)
-//falta considerar los datos de los cursos
-//con eso se añaden los controllers para subir la data
-// falta modelos y migraciones 
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,6 +12,11 @@ Route::get('/cursos', function () {
     // agregar los datos de los cursos
     return view('cursos');
 });
+
+Route::get('/bartenderprofesional', function () {
+    return view('bartenderprofesional');
+});
+
 
 // Vista para el detalle de un curso específico (parámetro dinámico, por eso se usa GET)
 Route::get('/cursos/{id}', function ($id) {
@@ -35,7 +36,7 @@ Route::get('/contacto', function () {
 
 // Página inicio sesión estática
 Route::get('/login', function () {
-    return view('auth.login');
+    return view('login');
 });
 // Post para el login
 Route::post('/login', function () {
@@ -45,7 +46,7 @@ Route::post('/login', function () {
 
 // Página de registro de nuevos alumnos estática
 Route::get('/registro', function () {
-    return view('auth.registro');
+    return view('registro');
 });
 // Post para el registro 
 Route::post('/registro', function () {
