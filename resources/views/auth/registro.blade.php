@@ -1,10 +1,12 @@
+
 @extends('layout')
 
 @section('content')
 <style>
     body {
         background-color: #A2845E;
-    }
+   }
+
     .register-box {
         background-color: #380516;
         padding: 3rem 2.5rem 2.5rem 2.5rem;
@@ -16,6 +18,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+
         margin: 2rem auto 2rem auto;
     }
     .register-box h2 {
@@ -24,12 +28,14 @@
         font-size: 1.3rem;
         font-weight: normal;
     }
+
     .register-box label {
         align-self: flex-start;
         margin-bottom: 0.3rem;
         margin-top: 0.7rem;
         font-size: 1rem;
     }
+
     .register-box input {
         width: 100%;
         padding: 0.7rem;
@@ -41,6 +47,7 @@
         color: #02110C;
         font-size: 1rem;
     }
+
     .register-box button {
         width: 70%;
         margin: 1.2rem auto 0 auto;
@@ -55,9 +62,16 @@
         display: block;
         font-size: 1rem;
     }
+
     .register-box button:hover {
         background-color: #02110C;
     }
+
+
+    .register-box button:hover {
+        background-color: #02110C;
+    }
+
     @media (max-width: 480px) {
         .register-box {
             padding: 2rem 0.5rem 2rem 0.5rem;
