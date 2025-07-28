@@ -14,6 +14,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 0 auto;
+    }
 
     .login-box h2 {
         text-align: center;
@@ -65,7 +67,7 @@
             padding: 2rem 0.5rem 2rem 0.5rem;
             max-width: 300vw;
             width: 200vw;
-=======
+
     .login-box button:hover {
         background-color: #02110C;
     }
