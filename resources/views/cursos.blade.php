@@ -145,7 +145,7 @@
             <div class="container-fluid">
                 <div class="row g-4 justify-content-center">
                     <div class="col-12 col-sm-4">
-                        <a href="/bartenderprofesional" class="course-link">
+                        <a href="/curso-detalle" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender1.jpg" alt="Bartender Profesional">
                                 <div class="course-title">Bartender Profesional</div>
@@ -153,7 +153,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/barista" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender2.jpg" alt="Curso Barista">
                                 <div class="course-title">Curso Barista</div>
@@ -161,7 +161,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/fermentacion" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender3.jpg" alt="Curso de Fermentación">
                                 <div class="course-title">Curso de Fermentación</div>
@@ -169,7 +169,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/destilacion" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender4.jpg" alt="Curso de Destilación">
                                 <div class="course-title">Curso de Destilación</div>
@@ -177,7 +177,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/bartender-mixologia" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender5.jpg" alt="Bartender Profesional">
                                 <div class="course-title">Bartender Profesional</div>
@@ -185,7 +185,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/cerveza" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender6.png" alt="Bar Academy On Tour">
                                 <div class="course-title">Especialización en Cerveza</div>
@@ -193,7 +193,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/mixologia" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender7.jpg" alt="Master en Mixología">
                                 <div class="course-title">Master en Mixología</div>
@@ -201,7 +201,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/bar-foodie" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender8.jpg" alt="Bar Foodie">
                                 <div class="course-title">Bar Foodie</div>
@@ -209,7 +209,7 @@
                         </a>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <a href="/cursos/vinos" class="course-link">
+                        <a href="/cursos" class="course-link">
                             <div class="course-card">
                                 <img src="assets/bartender9.jpg" alt="Curso Inicial de Vinos">
                                 <div class="course-title">Curso Inicial de Vinos</div>

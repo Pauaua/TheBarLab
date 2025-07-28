@@ -2,15 +2,6 @@
 
 @section('content')
 <style>
-    body {
-        background-color: #A2845E;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
 
     .login-box {
         background-color: #380516;
@@ -23,7 +14,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
 
     .login-box h2 {
         text-align: center;
@@ -75,6 +65,16 @@
             padding: 2rem 0.5rem 2rem 0.5rem;
             max-width: 300vw;
             width: 200vw;
+=======
+    .login-box button:hover {
+        background-color: #02110C;
+    }
+    @media (max-width: 480px) {
+        .login-box {
+            padding: 2rem 0.5rem 2rem 0.5rem;
+            max-width: 100vw;
+            width: 100vw;
+
             min-width: 0;
             border-radius: 0;
             box-shadow: none;
@@ -106,6 +106,11 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" placeholder="Contraseña" required>
         <button type="submit">ENVIAR</button>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="/registro" style="color: #E0E0E0; text-decoration: underline; font-size: 0.98rem;">¿No tienes cuenta? Regístrate</a>
+        </div>
+
     </form>
 </div>
 @endsection

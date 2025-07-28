@@ -13,15 +13,15 @@ Route::get('/cursos', function () {
     return view('cursos');
 });
 
-Route::get('/bartenderprofesional', function () {
+Route::get('/curso-detalle', function () {
     return view('bartenderprofesional');
 });
 
 
 // Vista para el detalle de un curso específico (parámetro dinámico, por eso se usa GET)
-Route::get('/cursos/{id}', function ($id) {
-    return view('curso-detalle', ['id' => $id]);
-});
+#Route::get('/cursos/{id}', function ($id) {
+#    return view('curso-detalle', ['id' => $id]);
+#});
 
 // Página con información sobre la escuela
 Route::get('/nosotros', function () {
@@ -36,7 +36,7 @@ Route::get('/contacto', function () {
 
 // Página inicio sesión estática
 Route::get('/login', function () {
-    return view('login');
+    return view('auth.login');
 });
 // Post para el login
 Route::post('/login', function () {
@@ -46,7 +46,7 @@ Route::post('/login', function () {
 
 // Página de registro de nuevos alumnos estática
 Route::get('/registro', function () {
-    return view('registro');
+    return view('auth.registro');
 });
 // Post para el registro 
 Route::post('/registro', function () {

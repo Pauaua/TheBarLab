@@ -5,13 +5,7 @@
 <style>
     body {
         background-color: #A2845E;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
+   }
 
     .register-box {
         background-color: #380516;
@@ -24,8 +18,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
 
+
+        margin: 2rem auto 2rem auto;
+    }
     .register-box h2 {
         text-align: center;
         margin-bottom: 2rem;
@@ -66,6 +62,11 @@
         display: block;
         font-size: 1rem;
     }
+
+    .register-box button:hover {
+        background-color: #02110C;
+    }
+
 
     .register-box button:hover {
         background-color: #02110C;
