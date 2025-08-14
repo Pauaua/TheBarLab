@@ -1,0 +1,64 @@
+/* Colores principales */
+:root {
+    --primary-dark: #02110C;
+    --primary-wine: #380516;
+    --primary-bg: #A2845E;
+    --text-light: #e0e0e0;
+}
+
+/* Estilos generales */
+body {
+    background-color: var(--primary-bg);
+}
+
+/* Botones personalizados */
+.btn-thebarlab {
+    background-color: var(--primary-wine);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.btn-thebarlab:hover {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+/* Headers de cards */
+.card-header-thebarlab {
+    background-color: var(--primary-wine);
+    color: var(--text-light);
+}
+
+/* Tablas */
+.table-thebarlab thead {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+}
+
+/* Accordion personalizado */
+.accordion-button-thebarlab {
+    background-color: var(--primary-wine);
+    color: var(--text-light);
+}
+
+.accordion-button-thebarlab:not(.collapsed) {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+}
+
+/* Texto claro */
+.text-thebarlab {
+    color: var(--text-light);
+}
+
+/* Badges personalizados */
+.badge-thebarlab {
+    background-color: var(--primary-wine);
+    color: var(--text-light);
+}
+
+/* Bordes personalizados */
+.border-thebarlab {
+    border-color: var(--primary-wine);
+}

@@ -48,6 +48,32 @@ Route::post('/login', function () {
 Route::get('/registro', function () {
     return view('auth.registro');
 });
+
+
+// Portal del estudiante
+Route::get('/student-dashboard', function () {
+    return view('student-dashboard');
+})->name('student.dashboard');
+
+// Portal del docente
+Route::get('/teacher-dashboard', function () {
+    return view('teacher-dashboard');
+})->name('teacher.dashboard');
+
+// Horarios y calendario
+Route::get('/horarios', function () {
+    return view('horarios');
+});
+
+// Galería de eventos y trabajos
+Route::get('/galeria', function () {
+    return view('galeria');
+});
+
+// Preguntas frecuentes
+Route::get('/faq', function () {
+    return view('faq');
+});
 // Post para el registro 
 Route::post('/registro', function () {
     // falta: lógica de registro
