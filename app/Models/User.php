@@ -17,6 +17,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    
+    protected $casts  = ['email_verified_at' => 'datetime'];
+    
+    //hash automático al asignar
+    public function setPasswordAttribute($value){
+        if($value){ $this->attributes['password'] = bcrypt($value); }
+    }
+
     // Relaciones
     public function coursesAsInstructor()
     {

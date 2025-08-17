@@ -2,25 +2,30 @@
 
 <?php
 
-
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CoursesController;
-
 use App\Http\Controllers\EnrollmentFixedController;
+use App\Http\Controllers\EnrollmentsController;
+
+/*
+|--------------------------------------------------------------------------
+| Rutas públicas (Frontend)
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return view('inicio'); // antes tenías 'welcome', reemplazo por tu vista 'inicio'
+})->name('inicio');
+
+Route::get('/cursos', fn() => view('cursos'))->name('cursos');
+Route::get('/curso-detalle', fn() => view('bartenderprofesional'))->name('curso.detalle');
+Route::get('/nosotros', fn() => view('nosotros'))->name('nosotros');
+Route::get('/contacto', fn() => view('contacto'))->name('contacto');
+
+
 // CRUD de inscripciones fijas para user_id=2 y course_id=2
 Route::resource('enrollments-fixed', EnrollmentFixedController::class);
-
-
-Route::get('/', function () {
-    return view('inicio');
-}); 
-
-use App\Http\Controllers\EnrollmentsController;
-// CRUD de inscripciones (solo para alumnos autenticados)
-Route::middleware(['auth'])->group(function () {
-    Route::resource('enrollments', EnrollmentsController::class)->except(['edit', 'update']);
-});
 
 // CRUD de courses
 Route::resource('courses', CoursesController::class);
@@ -30,50 +35,49 @@ Route::get('/cursos', function () {
     return view('cursos');
 })->name('cursos');
 
-Route::get('/curso-detalle', function () {
-    return view('bartenderprofesional');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas privadas (requieren autenticación)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    // dashboard de Breeze
+    Route::get('/dashboard', fn() => view('dashboard'))
+        ->middleware(['verified'])
+        ->name('dashboard');
+
+  
+    // perfil de usuario (Breeze ya trae controlador ProfileController)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Ruta admin protegida
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('admin/users', UserController::class)
+        ->parameters(['users' => 'user'])
+        ->names('admin.users');
+    });
+  
+    
+    // CRUD de inscripciones (solo para alumnos autenticados)
+    Route::middleware(['auth'])->group(function () {
+    Route::resource('enrollments', EnrollmentsController::class)->except(['edit', 'update']);
 });
 
-
-// Vista para el detalle de un curso específico (parámetro dinámico, por eso se usa GET)
-#Route::get('/cursos/{id}', function ($id) {
-#    return view('curso-detalle', ['id' => $id]);
-#});
-
-// Pagina para Cursos
-
-// Página con información sobre la escuela
-Route::get('/nosotros', function () {
-    return view('nosotros');
+    // gestión de usuarios (ejemplo: lista de usuarios)
+    Route::get('/usuarios', [UserController::class, 'listView'])->name('usuarios.index');
 });
 
-// Formulario o información de contacto
-Route::get('/contacto', function () {
-    return view('contacto');
-});
+/*
+|--------------------------------------------------------------------------
+| Rutas de autenticación Breeze
+|--------------------------------------------------------------------------
+| Breeze instala login, register, logout, forgot password, reset password, etc.
+*/
+require __DIR__.'/auth.php';
 
 
-// Página inicio sesión estática
-Route::get('/login', function () {
-    return view('auth.login');
-});
-// Post para el login
-Route::post('/login', function () {
-    // falta: lógica de autenticación
-    return redirect('/'); // Redirigir a la página principal después del login
-});
-
-// Página de registro de nuevos alumnos estática
-Route::get('/registro', function () {
-    return view('auth.registro');
-});
-// Post para el registro 
-Route::post('/registro', function () {
-    // falta: lógica de registro
-    return redirect('/login'); // Redirigir al login después del registro
-});
-
-// Perfil del alumno
-Route::get('/perfil', function () {
-    return view('alumno.perfil');
-});
