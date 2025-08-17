@@ -1,17 +1,34 @@
+
+
 <?php
 
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\CoursesController;
+
+use App\Http\Controllers\EnrollmentFixedController;
+// CRUD de inscripciones fijas para user_id=2 y course_id=2
+Route::resource('enrollments-fixed', EnrollmentFixedController::class);
 
 
 Route::get('/', function () {
     return view('inicio');
 }); 
 
-Route::get('/cursos', function () {
-    // agregar los datos de los cursos
-    return view('cursos');
+use App\Http\Controllers\EnrollmentsController;
+// CRUD de inscripciones (solo para alumnos autenticados)
+Route::middleware(['auth'])->group(function () {
+    Route::resource('enrollments', EnrollmentsController::class)->except(['edit', 'update']);
 });
+
+// CRUD de courses
+Route::resource('courses', CoursesController::class);
+
+// Ruta /cursos muestra la vista personalizada cursos.blade.php
+Route::get('/cursos', function () {
+    return view('cursos');
+})->name('cursos');
 
 Route::get('/curso-detalle', function () {
     return view('bartenderprofesional');
@@ -22,6 +39,8 @@ Route::get('/curso-detalle', function () {
 #Route::get('/cursos/{id}', function ($id) {
 #    return view('curso-detalle', ['id' => $id]);
 #});
+
+// Pagina para Cursos
 
 // Página con información sobre la escuela
 Route::get('/nosotros', function () {
