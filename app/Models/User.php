@@ -19,8 +19,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'rut',
+        'birthdate',
         'email',
         'password',
+        'role', // Added role field
+        'email_verified_at',
+        'remember_token',
+
     ];
 
     /**
@@ -44,5 +50,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    // Relaciones
+    public function coursesAsInstructor()
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments');
     }
 }
