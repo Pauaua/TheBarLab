@@ -5,7 +5,7 @@
 <style>
     body {
         background-color: #A2845E;
-   }
+    }
 
     .register-box {
         background-color: #380516;
@@ -18,10 +18,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
-
         margin: 2rem auto 2rem auto;
     }
+
     .register-box h2 {
         text-align: center;
         margin-bottom: 2rem;
@@ -67,9 +66,11 @@
         background-color: #02110C;
     }
 
-
-    .register-box button:hover {
-        background-color: #02110C;
+    .register-box .error {
+        color: #e74c3c;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        text-align: center;
     }
 
     @media (max-width: 480px) {
@@ -101,19 +102,62 @@
 
 <div class="register-box">
     <h2>Regístrate</h2>
-    <form method="POST" action="/register">
-        @csrf
+    <form id="registerForm">
         <label for="name">Nombre Completo</label>
         <input type="text" id="name" name="name" placeholder="Nombre Completo" required>
         <label for="rut">RUT</label>
         <input type="text" id="rut" name="rut" placeholder="X.XXX.XXX-X" required>
         <label for="birthdate">Fecha de Nacimiento</label>
-        <input type="date" id="birthdate" name="birthdate" placeholder="Fecha de Nacimiento" required>
+        <input type="date" id="birthdate" name="birthdate" required>
         <label for="email">Correo</label>
         <input type="email" id="email" name="email" placeholder="ejemplo@correo.cl" required>
         <label for="password">Contraseña</label>
         <input type="password" id="password" name="password" placeholder="Utiliza mayúsculas y números para mayor seguridad." required>
+        <div id="error-message" class="error" style="display: none;"></div>
         <button type="submit">ENVIAR</button>
     </form>
 </div>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
+
+        // Obtener el token CSRF del meta en el layout
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        try {
+            const response = await fetch('/registro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', result.token);
+                localStorage.setItem('user', JSON.stringify(result.usuario));
+                alert('¡Registro exitoso!');
+                window.location.href = '/';
+            } else {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = result.msg || 'Error en el registro';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error de conexión con el servidor');
+        }
+    });
+</script>
 @endsection

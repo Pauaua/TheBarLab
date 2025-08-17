@@ -1,60 +1,56 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProfileController;
 
-
+/*
+|--------------------------------------------------------------------------
+| Rutas públicas (Frontend)
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    return view('inicio');
-}); 
+    return view('inicio'); // antes tenías 'welcome', reemplazo por tu vista 'inicio'
+})->name('inicio');
 
-Route::get('/cursos', function () {
-    // agregar los datos de los cursos
-    return view('cursos');
+Route::get('/cursos', fn() => view('cursos'))->name('cursos');
+Route::get('/curso-detalle', fn() => view('bartenderprofesional'))->name('curso.detalle');
+Route::get('/nosotros', fn() => view('nosotros'))->name('nosotros');
+Route::get('/contacto', fn() => view('contacto'))->name('contacto');
+
+/*
+|--------------------------------------------------------------------------
+| Rutas privadas (requieren autenticación)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    // dashboard de Breeze
+    Route::get('/dashboard', fn() => view('dashboard'))
+        ->middleware(['verified'])
+        ->name('dashboard');
+
+  
+    // perfil de usuario (Breeze ya trae controlador ProfileController)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Ruta admin protegida
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('admin/users', UserController::class)
+        ->parameters(['users' => 'user'])
+        ->names('admin.users');
+    });
+
+    // gestión de usuarios (ejemplo: lista de usuarios)
+    Route::get('/usuarios', [UserController::class, 'listView'])->name('usuarios.index');
 });
 
-Route::get('/curso-detalle', function () {
-    return view('bartenderprofesional');
-});
+/*
+|--------------------------------------------------------------------------
+| Rutas de autenticación Breeze
+|--------------------------------------------------------------------------
+| Breeze instala login, register, logout, forgot password, reset password, etc.
+*/
+require __DIR__.'/auth.php';
 
-
-// Vista para el detalle de un curso específico (parámetro dinámico, por eso se usa GET)
-#Route::get('/cursos/{id}', function ($id) {
-#    return view('curso-detalle', ['id' => $id]);
-#});
-
-// Página con información sobre la escuela
-Route::get('/nosotros', function () {
-    return view('nosotros');
-});
-
-// Formulario o información de contacto
-Route::get('/contacto', function () {
-    return view('contacto');
-});
-
-
-// Página inicio sesión estática
-Route::get('/login', function () {
-    return view('auth.login');
-});
-// Post para el login
-Route::post('/login', function () {
-    // falta: lógica de autenticación
-    return redirect('/'); // Redirigir a la página principal después del login
-});
-
-// Página de registro de nuevos alumnos estática
-Route::get('/registro', function () {
-    return view('auth.registro');
-});
-// Post para el registro 
-Route::post('/registro', function () {
-    // falta: lógica de registro
-    return redirect('/login'); // Redirigir al login después del registro
-});
-
-// Perfil del alumno
-Route::get('/perfil', function () {
-    return view('alumno.perfil');
-});
