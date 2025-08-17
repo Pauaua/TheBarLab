@@ -1,8 +1,13 @@
+
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\EnrollmentFixedController;
+use App\Http\Controllers\EnrollmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +22,21 @@ Route::get('/cursos', fn() => view('cursos'))->name('cursos');
 Route::get('/curso-detalle', fn() => view('bartenderprofesional'))->name('curso.detalle');
 Route::get('/nosotros', fn() => view('nosotros'))->name('nosotros');
 Route::get('/contacto', fn() => view('contacto'))->name('contacto');
+
+
+// CRUD de inscripciones fijas para user_id=2 y course_id=2
+Route::resource('enrollments-fixed', EnrollmentFixedController::class);
+
+// CRUD de courses
+Route::resource('courses', CoursesController::class);
+
+// Ruta /cursos muestra la vista personalizada cursos.blade.php
+Route::get('/cursos', function () {
+    return view('cursos');
+})->name('cursos');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +61,12 @@ Route::middleware(['auth'])->group(function () {
         ->parameters(['users' => 'user'])
         ->names('admin.users');
     });
+  
+    
+    // CRUD de inscripciones (solo para alumnos autenticados)
+    Route::middleware(['auth'])->group(function () {
+    Route::resource('enrollments', EnrollmentsController::class)->except(['edit', 'update']);
+});
 
     // gestión de usuarios (ejemplo: lista de usuarios)
     Route::get('/usuarios', [UserController::class, 'listView'])->name('usuarios.index');
@@ -53,4 +79,5 @@ Route::middleware(['auth'])->group(function () {
 | Breeze instala login, register, logout, forgot password, reset password, etc.
 */
 require __DIR__.'/auth.php';
+
 
